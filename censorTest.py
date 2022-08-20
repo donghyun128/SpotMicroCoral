@@ -1,43 +1,29 @@
 import board
 import digitalio
 import time
+from hcsr04_coral import HCSR04
 
-trig = digitalio.DigitalInOut(board.GPIO_P29)
-trig.direction = digitalio.Direction.OUTPUT
 
-echo = digitalio.DigitalInOut(board.GPIO_P31)
-echo.direction = digitalio.Direction.INPUT
+leftEye = HCSR04(board.GPIO_P16,board.GPIO_P18) 
+rightEye = HCSR04(board.GPIO_P29,board.GPIO_P31)
 
-def distance(TRIG,ECHO):
-    trig.value = True
-    time.sleep(0.001)
-    trig.value = False
-    
-    pulseStart = time.time()
-    
-    while echo.value == 0:
-        pulseStart = time.time()
-    while echo.value == 1:
-        pulseEnd = time.time()
-
-    pulseDuration = pulseEnd - pulseStart
-    distance = pulseDuration * 17150 
-    distance = round(distance, 2)
-    return distance 
-
-trig.value = False 
 
 try:
     while True:
-
-        print(distance(trig,echo))
+        
+        print("left Eye direction : ", end = " ")
+        print(leftEye.distance(),end=" ")
+        print("cm")
+        
+        print("right Eye direction : ",end = " ")
+        print(rightEye.distance(),end=" ")
         print("cm")
         time.sleep(0.06)
 
 except KeyboardInterrupt:
     print("stop!")
-    trig.deinit()
-    echo.deinit()
+    leftEye.deinit()
+    rightEye.deinit()
 
 
 
