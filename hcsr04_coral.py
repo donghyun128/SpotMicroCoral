@@ -31,6 +31,7 @@ class HCSR04:
         distance = round(distance, 2)
         return distance 
      
+    
     def deinit(self):
         self.trig.deinit()
         self.echo.deinit()
