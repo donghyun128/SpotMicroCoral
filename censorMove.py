@@ -108,7 +108,7 @@ class censorInterrupt():
                 goStragiht()
  
             time.sleep(0.06)
-            calcRbStep()
+            self.calcRbStep()
         
            
 

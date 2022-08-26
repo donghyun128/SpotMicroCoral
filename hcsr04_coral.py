@@ -14,6 +14,9 @@ class HCSR04:
         
         self.trig.value = False
 
+    """
+    distance: return centimeter distance measured by hcsr04 Ultrasonic censor
+    """
     def distance(self):
         self.trig.value = True
         time.sleep(0.00001)
@@ -27,7 +30,8 @@ class HCSR04:
             pulseEnd = time.monotonic()
 
         pulseDuration = pulseEnd - pulseStart
-        distance = pulseDuration * 340 * 1000000
+        # distance [cm] = speed of ultrasonic wave * round trip time = 340 [m/s] * pulseDuration [s] / 2 * 100 [cm/m]
+        distance = pulseDuration * 34000 
         distance = round(distance, 2)
         return distance 
      
