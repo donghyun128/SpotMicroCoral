@@ -101,9 +101,12 @@ class censorInterrupt():
 
             leftDirection = self.leftCensor.distance()
             rightDirection = self.rightCensor.distance()
-            
-            if (leftDirection < 10 && rightDirection < 10):
+            if (leftDirection < 5 && rightDirection < 5):
+                goBack()
+
+            elif ((leftDirection >= 5 && rightDirection >=5) && (leftDirection < 10 && rightDirection < 10)):
                 leftRotate()
+
             else:
                 goStragiht()
  
